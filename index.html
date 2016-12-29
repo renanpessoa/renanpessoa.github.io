@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Guia referência de funções</title>
+    <style>
+        body {
+            font-family: "Verdana";
+            font-size: 12px;
+        }
+
+        h1, h2, h3, h4 {
+            margin: 4px 0 4px 0;
+        }
+
+        li {
+            margin: 5px 0 5px 0;
+        }
+
+        code {
+            font-size: 13px;
+        }
+
+        .box {
+            background-color: #eef;
+            width: 750px;
+            border: 1px dotted #ccc;
+            margin: 30px 30px 30px 30px;
+            padding: 2px 10px 2px 10px;
+        }
+
+        .text-blue {
+            color: #00f;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .list-title {
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .text-ten {
+            font-size: 10px;
+        }
+
+        a{
+
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<a style="display:scroll;position:fixed;bottom:2px;right:2px;" href="#" title="Para o topo !">
+<img src="./topo.png" border="0" />
+</a>
+
+<div class="center">
+    <h2>Guia de Referência de Funções</h2>
+    <p class="text-ten">Desenvolvido por Renan Pessoa &lt;renan.s (a) hostdime.com.br / renanhpessoa (a) gmail.com&gt;</p>
+</div>
+
+<ol>
+    <li>
+        <p class="list-title">Instalação</p>
+        <ul>
+        <li><a href="#utilizacao">Como utilizar</a> - Como utilizar as funções disponíveis no seu script </li>
+        </ul>
+    </li>
+
+        <li>
+        <p class="list-title">Validação</p>
+        <ul>
+        <li><a href="#func_valida_dominio">func_valida_dominio</a> - Valida o domínio informado</li>
+        <li><a href="#func_valida_usuario">func_valida_usuario</a> - Valida o usuário informado</li>
+        <li><a href="#func_valida_revendedor">func_valida_revendedor</a> - Valida o revendedor informado</li>
+        </ul>
+    </li>
+
+    <li>
+        <p class="list-title">Outros</p>
+        <ul>
+        <li><a href="#func_citacao_aleatoria">func_citacao_aleatoria</a> - Exibe uma citação aleatória</li>
+        </ul>
+    </li>
+
+</ol>
+
+
+<div class="box" id="utilizacao">
+<h3 class="text-blue">Utilização</h3>
+<hr>
+<h4>Descrição</h4>
+<p>Adiciona diversas funções que podem ser utilizadas nos scripts</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Nenhum.</p>
+<hr>
+<h4>Código</h4>
+<pre>
+<code>
+#. Importa as funções externas .#
+##################################
+curl -skL https://gist.githubusercontent.com > 
+/tmp/funcoes_externas.class
+[[ -z `cat /tmp/funcoes_externas.class | grep Teste_Valida` ]] && 
+{ echo -e "Não foi possível importar as funções externas.";exit;}
+source /tmp/funcoes_externas.class && rm -fr /tmp/funcoes_externas.class;
+##################################
+</code>
+</pre>
+<hr>
+<h4>Exemplo</h4>
+<pre>
+<code>
+#!/bin/bash
+
+#. Importa as funções externas .#
+##################################
+curl -skL https://gist.githubusercontent.com > 
+/tmp/funcoes_externas.class
+[[ -z `cat /tmp/funcoes_externas.class | grep Teste_Valida` ]] && 
+{ echo -e "Não foi possível importar as funções externas.";exit;}
+source /tmp/funcoes_externas.class && rm -fr /tmp/funcoes_externas.class;
+##################################
+
+while :;do
+
+    echo -en "Informe o domínio: "
+    read dominio
+    func_valida_dominio $dominio    # <-- Utilizando função para validar o domínio informado.
+    [[ `echo $?` == 0 ]] && break
+
+done
+
+echo "O domínio é válido, continuando as verificações..."
+
+</code>
+</pre>
+<hr>
+<h4>Comentários</h4>
+<p>Adicione o código no inicio do script para utilizar as funções</p>
+</div>
+
+
+<div class="box" id="func_valida_dominio">
+<h3 class="text-blue">func_valida_dominio()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">func_valida_dominio &lt;domínio&gt;</p>
+<p>Valida o domínio informado</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>domínio - o domínio a ser validado</p>
+<hr>
+<h4>Saída</h4>
+<p>Se for verdadeiro(válido) retorna 0 </p>
+<p>Se for falso retorna 1</p>
+<hr>
+<h4>Exemplos</h4>
+<pre>
+<code>
+while :;do
+
+    echo -en "Informe o domínio: "
+    read dominio
+    func_valida_dominio $dominio
+    [[ `echo $?` == 0 ]] && break
+
+done
+
+echo "O domínio é válido, continuando as verificações..."
+</code>
+</pre>
+<hr>
+<h4>Comentários</h4>
+<p>No exemplo acima será realizado um loop solicitando o domínio até que seja informado um domínio válido. Após ler o domínio[read dominio] é chamado a função passando como parâmetro o domínio 'func_valida_dominio $dominio', caso o domínio seja verdadeiro o  loop é interrompido '[[ `echo $?` == 0 ]] && break' e o código continua, caso contrário é executado novamente. </p>
+</div>
+
+
+
+<div class="box" id="func_valida_usuario">
+<h3 class="text-blue">func_valida_usuario()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">func_valida_usuario &lt;usuário&gt;</p>
+<p>Valida o usuário informado</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>usuário - o usuário a ser validado</p>
+<hr>
+<h4>Saída</h4>
+<p>Se for verdadeiro(válido) retorna 0 </p>
+<p>Se for falso retorna 1</p>
+<hr>
+<h4>Exemplos</h4>
+<pre>
+<code>
+while :;do
+
+    echo -en "Informe o usuário: "
+    read usuario
+    func_valida_usuario $usuario
+    [[ `echo $?` == 0 ]] && break
+
+done
+
+echo "O usuário é válido, continuando as verificações..."
+</code>
+</pre>
+<hr>
+<h4>Comentários</h4>
+<p>No exemplo acima será realizado um loop solicitando o usuário até que seja informado um usuário válido. Após ler o usuário[read usuario] é chamado a função passando como parâmetro o usuário 'func_valida_usuario $usuario', caso o usuario seja verdadeiro o  loop é interrompido '[[ `echo $?` == 0 ]] && break' e o código continua, caso contrário é executado novamente. </p>
+</div>
+
+
+
+<div class="box" id="func_valida_revendedor">
+<h3 class="text-blue">func_valida_revendedor()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">func_valida_revendedor &lt;revendedor&gt;</p>
+<p>Valida o revendedor informado</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>revendedor- o usuário a ser validado</p>
+<hr>
+<h4>Saída</h4>
+<p>Se for verdadeiro(válido) retorna 0 </p>
+<p>Se for falso retorna 1</p>
+<hr>
+<h4>Exemplos</h4>
+<pre>
+<code>
+while :;do
+
+    echo -en "Informe o revendedor: "
+    read revendedor
+    func_valida_revendedor $revendedor
+    [[ `echo $?` == 0 ]] && break
+
+done
+
+echo "O revendedor é válido, continuando as verificações..."
+</code>
+</pre>
+<hr>
+<h4>Comentários</h4>
+<p>No exemplo acima será realizado um loop solicitando o revendedor até que seja informado um usuário válido. Após ler o revendedor[read revendedor] é chamado a função passando como parâmetro o revendedor 'func_valida_revendedor $revendedor', caso o revendedor seja verdadeiro o  loop é interrompido '[[ `echo $?` == 0 ]] && break' e o código continua, caso contrário é executado novamente. </p>
+</div>
+
+
+
+
+<div class="box" id="func_citacao_aleatoria">
+<h3 class="text-blue">func_citacao_aleatoria()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">func_citacao_aleatoria</p>
+<p>Exibe uma citação aleatoria</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Nenhum</p>
+<hr>
+<h4>Saída</h4>
+<p>Citação aleatória </p>
+<hr>
+<h4>Exemplos</h4>
+<pre>
+<code>
+
+Código
+---------------
+f=$(func_citacao_aleatoria);
+
+echo -e "Frase do dia: $f";
+---------------
+
+Saída
+---------------
+root@vps [/home/renanpessoa]# bash frase.sh 
+Frase do dia: Um amigo é a pessoa a quem mais se dá crédito quando fala mal de nós. Jean Rostand
+root@vps [/home/renanpessoa]# 
+---------------
+</code>
+</pre>
+<hr>
+<h4>Comentários</h4>
+<p> A função gera uma citação aleátoria cade vez que é executada</p>
+</div>
+
+
+
+
+
+</div>
+</body>
+</html>
