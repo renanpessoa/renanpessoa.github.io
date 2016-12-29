@@ -103,13 +103,13 @@
 <h4>Código</h4>
 <pre>
 <code>
-#. Importa as funções externas .#
+#. Importa funções externas .#
 ##################################
-curl -skL https://gist.githubusercontent.com > 
-/tmp/funcoes_externas.class
-[[ -z `cat /tmp/funcoes_externas.class | grep Teste_Valida` ]] && 
+curl -skL https://raw.githubusercontent.com/renanpessoa/cPanel_Functions/master/functions.sh > 
+/tmp/funcoes_externas.sh
+[[ -z `cat /tmp/funcoes_externas.sh | grep Teste_Valida` ]] && 
 { echo -e "Não foi possível importar as funções externas.";exit;}
-source /tmp/funcoes_externas.class && rm -fr /tmp/funcoes_externas.class;
+source /tmp/funcoes_externas.shs && rm -fr /tmp/funcoes_externas.sh;
 ##################################
 </code>
 </pre>
@@ -119,13 +119,13 @@ source /tmp/funcoes_externas.class && rm -fr /tmp/funcoes_externas.class;
 <code>
 #!/bin/bash
 
-#. Importa as funções externas .#
+#. Importa funções externas .#
 ##################################
-curl -skL https://gist.githubusercontent.com > 
-/tmp/funcoes_externas.class
-[[ -z `cat /tmp/funcoes_externas.class | grep Teste_Valida` ]] && 
+curl -skL https://raw.githubusercontent.com/renanpessoa/cPanel_Functions/master/functions.sh > 
+/tmp/funcoes_externas.sh
+[[ -z `cat /tmp/funcoes_externas.sh | grep Teste_Valida` ]] && 
 { echo -e "Não foi possível importar as funções externas.";exit;}
-source /tmp/funcoes_externas.class && rm -fr /tmp/funcoes_externas.class;
+source /tmp/funcoes_externas.sh && rm -fr /tmp/funcoes_externas.sh;
 ##################################
 
 while :;do
