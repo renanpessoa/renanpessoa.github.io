@@ -84,6 +84,7 @@
     <li>
         <p class="list-title">Informação</p>
         <ul>
+        <li><a href="#func_usuario_info">func_usuario_info</a> - Exibe diversas informações sobre a conta informada</li>
         <li><a href="#func_usuario_tamanho">func_usuario_tamanho</a> - Exibe o tamanho da home da conta(/home/usuario) de maneira instântanea pois utiliza cache do servidor</li>
         </ul>
     </li>
@@ -160,43 +161,6 @@ echo "O domínio é válido, continuando as verificações..."
 
 <!-- -------------- VALIDAÇÃO  ----------------- -->
 
-
-<div class="box" id="func_valida_dominio">
-<h3 class="text-blue">func_valida_dominio()</h3>
-<hr>
-<h4>Descrição</h4>
-<p class="text-blue">func_valida_dominio &lt;domínio&gt;</p>
-<p>Valida o domínio informado</p>
-<hr>
-<h4>Parâmetros</h4>
-<p>domínio - o domínio a ser validado</p>
-<hr>
-<h4>Saída</h4>
-<p>Se for verdadeiro(válido) retorna 0 </p>
-<p>Se for falso retorna 1</p>
-<hr>
-<h4>Exemplos</h4>
-<pre>
-<code>
-while :;do
-
-    echo -en "Informe o domínio: "
-    read dominio
-    func_valida_dominio $dominio
-    [[ `echo $?` == 0 ]] && break
-
-done
-
-echo "O domínio é válido, continuando as verificações..."
-</code>
-</pre>
-<hr>
-<h4>Comentários</h4>
-<p>No exemplo acima será realizado um loop solicitando o domínio até que seja informado um domínio válido. Após ler o domínio[read dominio] é chamado a função passando como parâmetro o domínio 'func_valida_dominio $dominio', caso o domínio seja verdadeiro o  loop é interrompido '[[ `echo $?` == 0 ]] && break' e o código continua, caso contrário é executado novamente. </p>
-</div>
-
-
-
 <div class="box" id="func_valida_usuario">
 <h3 class="text-blue">func_valida_usuario()</h3>
 <hr>
@@ -269,6 +233,49 @@ echo "O revendedor é válido, continuando as verificações..."
 
 
 <!-- -------------- INFORMAÇÃO  ----------------- -->
+
+<div class="box" id="func_usuario_info">
+<h3 class="text-blue">func_usuario_info()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">func_usuario_info &lt;usuário&gt;</p>
+<p>Exibe diversas informações sobre a conta</p>
+<hr>
+<h4>Exemplos</h4>
+<pre>
+<code>
+Código
+---------------
+echo -en "Informe o usuário: "
+read usuario
+func_usuario_info $usuario
+---------------
+
+Saída
+---------------
+root@vps [/home/renanpessoa]# bash infoacct.sh 
+Informe o usuário: renanpessoa
+Usuário: renanpessoa
+Domínio: semdominio.com.br
+Owner:   root
+Pacote: essepacoteémeu
+Disco utilizado: 50mb
+Disco limite: unlimited
+Revendor: Não
+Suspensa: Não
+IP: 127.0.0.1
+Apontamento de DNS: Incorreto
+Backup: Ativo 
+Legacy Backup: Desativado 
+root@vps [/home/renanpessoa]# 
+---------------
+</code>
+</pre>
+<hr>
+<h4>Comentários</h4>
+<p>Esta função também pode ser utilizada na linha de comando, adicione um alias para o comando se preferir como por exemplo: alias infoacct='func_usuario_info', após isto basta executar 'infoacct $usuario' para conseguir diversas informações. </p>
+</div>
+
 
 <div class="box" id="func_usuario_tamanho">
 <h3 class="text-blue">func_usuario_tamanho()</h3>
