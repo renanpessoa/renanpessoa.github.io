@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,12 +73,19 @@
         </ul>
     </li>
 
-        <li>
+    <li>
         <p class="list-title">Validação</p>
         <ul>
         <li><a href="#func_valida_dominio">func_valida_dominio</a> - Valida o domínio informado</li>
         <li><a href="#func_valida_usuario">func_valida_usuario</a> - Valida o usuário informado</li>
         <li><a href="#func_valida_revendedor">func_valida_revendedor</a> - Valida o revendedor informado</li>
+        </ul>
+    </li>
+
+    <li>
+        <p class="list-title">Informação</p>
+        <ul>
+        <li><a href="#func_usuario_tamanho">func_usuario_tamanho</a> - Exibe o tamanho da home da conta(/home/usuario) de maneira instântanea pois utiliza o cache do servidor</li>
         </ul>
     </li>
 
@@ -90,12 +98,13 @@
 
 </ol>
 
+<!-- -------------- SOBRE  ----------------- -->
 
 <div class="box" id="utilizacao">
 <h3 class="text-blue">Utilização</h3>
 <hr>
 <h4>Descrição</h4>
-<p>Adiciona diversas funções que podem ser utilizadas nos scripts</p>
+<p>Adiciona diversas funções que podem ser utilizadas nos scripts ou diretamente na linha de comando</p>
 <hr>
 <h4>Parâmetros</h4>
 <p>Nenhum.</p>
@@ -140,8 +149,17 @@ echo "O domínio é válido, continuando as verificações..."
 </pre>
 <hr>
 <h4>Comentários</h4>
-<p>Adicione o código no inicio do script para utilizar as funções</p>
+<p>Adicione o código de importação no inicio do script e em seguida utilize as funções ! Também é possível utilizar as funções diretamente no bash: </p>
+
+<p>root@vps [~]# source <(curl -sk https://raw.githubusercontent.com/renanpessoa/cPanel_Functions/master/functions.sh)</p>
+<p>root@vps [~]# func_citacao_aleatoria</p>
+<p>O covarde só ataca quando está a salvo. Johann Goethe</p>
+<p>root@vps [~]# </p>
+
 </div>
+
+
+<!-- -------------- VALIDAÇÃO  ----------------- -->
 
 
 <div class="box" id="func_valida_dominio">
@@ -224,7 +242,7 @@ echo "O usuário é válido, continuando as verificações..."
 <p>Valida o revendedor informado</p>
 <hr>
 <h4>Parâmetros</h4>
-<p>revendedor- o usuário a ser validado</p>
+<p>revendedor - o usuário a ser validado</p>
 <hr>
 <h4>Saída</h4>
 <p>Se for verdadeiro(válido) retorna 0 </p>
@@ -251,20 +269,70 @@ echo "O revendedor é válido, continuando as verificações..."
 </div>
 
 
+<!-- -------------- INFORMAÇÃO  ----------------- -->
 
+<div class="box" id="func_usuario_tamanho">
+<h3 class="text-blue">func_usuario_tamanho()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue"> func_usuario_tamanho &lt;usuario&gt;</p>
+<p>Exibe o tamanho do home da conta de maneira instântania pois utiliza o cache do servidor, caso o cache esteja desabilitado é calculado o tamanho.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>usuário</p>
+<hr>
+<h4>Saída</h4>
+<p>root@vps [~]# func_usuario_tamanho renanpessoa
+<p>39M /home/renanpessoa</p>
+<p>root@vps [~]# </p>
+<hr>
+<h4>Exemplos</h4>
+<pre>
+<code>
+Código
+---------------
+
+read -p "Digite o usuário: " usuario;
+
+echo -e "\nTamanho da conta: "
+func_usuario_tamanho $usuario
+
+---------------
+
+Saída
+---------------
+
+root@vps [~]# bash tamanho.sh 
+Digite o usuário: renanpessoa
+
+Tamanho da conta: 
+39M /home/renanpessoa
+root@vps [~]#
+
+--------------- 
+</code>
+</pre>
+<hr>
+<h4>Comentários</h4>
+<p> Utilizando esta função seu script não perde um tempão calculando o tamanho das contas pois o resultado é instantâneo, produtividade e desempenho!</p>
+</div>
+
+
+
+<!-- -------------- OUTROS  ----------------- -->
 
 <div class="box" id="func_citacao_aleatoria">
 <h3 class="text-blue">func_citacao_aleatoria()</h3>
 <hr>
 <h4>Descrição</h4>
 <p class="text-blue">func_citacao_aleatoria</p>
-<p>Exibe uma citação aleatoria</p>
+<p>Exibe uma citação aleatória</p>
 <hr>
 <h4>Parâmetros</h4>
 <p>Nenhum</p>
 <hr>
 <h4>Saída</h4>
-<p>Citação aleatória </p>
+<p>Uma citação aleatória </p>
 <hr>
 <h4>Exemplos</h4>
 <pre>
@@ -289,10 +357,6 @@ root@vps [/home/renanpessoa]#
 <h4>Comentários</h4>
 <p> A função gera uma citação aleátoria cade vez que é executada</p>
 </div>
-
-
-
-
 
 </div>
 </body>
