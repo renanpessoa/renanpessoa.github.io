@@ -161,6 +161,45 @@ echo "O domínio é válido, continuando as verificações..."
 
 <!-- -------------- VALIDAÇÃO  ----------------- -->
 
+
+<div class="box" id="func_valida_dominio">
+<h3 class="text-blue">func_valida_dominio()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">func_valida_dominio &lt;domínio&gt;</p>
+<p>Valida o domínio informado</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>prefixo (opcional)<br>
+-s : Nenhuma mensagem de erro é retornada
+<p>domínio - o domínio a ser validado</p>
+<hr>
+<h4>Saída</h4>
+<p>Se for verdadeiro(válido) retorna 0 </p>
+<p>Se for falso retorna 1</p>
+<hr>
+<h4>Exemplos</h4>
+<pre>
+<code>
+while :;do
+
+    echo -en "Informe o domínio: "
+    read dominio
+    func_valida_dominio $dominio
+    [[ `echo $?` == 0 ]] && break # Se a funçao retornar 0, ou seja, se o domínio existir no servidor sai do loop e prossegue o script
+
+done
+
+echo "O domínio é válido, continuando as verificações..."
+
+</code>
+</pre>
+<hr>
+<h4>Comentários</h4>
+<p>No exemplo acima será realizado um loop solicitando o domínio até que seja informado um domínio válido. Após ler o domínio[read dominio] é chamado a função passando como parâmetro o domínio 'func_valida_dominio $dominio', caso o domínio seja verdadeiro o  loop é interrompido '[[ `echo $?` == 0 ]] && break' e o código continua, caso contrário é executado novamente. </p>
+</div>
+
+
 <div class="box" id="func_valida_usuario">
 <h3 class="text-blue">func_valida_usuario()</h3>
 <hr>
@@ -169,6 +208,8 @@ echo "O domínio é válido, continuando as verificações..."
 <p>Valida o usuário informado</p>
 <hr>
 <h4>Parâmetros</h4>
+<p>prefixo (opcional)<br>
+-s : Nenhuma mensagem de erro é retornada
 <p>usuário - o usuário a ser validado</p>
 <hr>
 <h4>Saída</h4>
@@ -205,6 +246,8 @@ echo "O usuário é válido, continuando as verificações..."
 <p>Valida o revendedor informado</p>
 <hr>
 <h4>Parâmetros</h4>
+<p>prefixo (opcional)<br>
+-s : Nenhuma mensagem de erro é retornada
 <p>revendedor - o usuário a ser validado</p>
 <hr>
 <h4>Saída</h4>
